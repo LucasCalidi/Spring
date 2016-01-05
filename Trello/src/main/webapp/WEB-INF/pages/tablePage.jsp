@@ -26,6 +26,7 @@
 		Lists of "${tableName}" board:
 		</br>
 			<!-- Trigger the modal with a button -->
+			<a href="/Trello/viewTables"><button type="button" class="btn btn-info btn-lg">Back To Boards</button></a>
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addListModal">Add List</button>
 			
 			<!-- Modal -->
