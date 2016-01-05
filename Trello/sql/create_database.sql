@@ -1,6 +1,7 @@
--- Table: account
--- Postgres database
--- DROP TABLE account;
+drop table account;
+drop table tables;
+drop table boards;
+drop table cards;
 
 CREATE TABLE account
 (
@@ -21,6 +22,37 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE account
+  OWNER TO postgres;
+
+CREATE TABLE tables
+(
+  TableID integer NOT NULL,
+  UserID integer NOT NULL,
+  TableName character varying(255) null,
+  CONSTRAINT tables_pkey PRIMARY KEY (TableID),
+  CONSTRAINT fk1_child FOREIGN KEY (UserID)
+      REFERENCES account (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE tables
+  OWNER TO postgres;
+
+CREATE TABLE cards(
+  CardID integer NOT null,
+  TableID integer not null,
+  ListName character varying(255) null,
+  CONSTRAINT cards_pkey PRIMARY KEY (CardID),
+  CONSTRAINT fk2_child FOREIGN KEY (TableID)
+      REFERENCES tables (TableID) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+WITH(
+  OIDS=FLASE
+);
+ALTER TABLE cards
   OWNER TO postgres;
   
 CREATE SEQUENCE hibernate_sequence
